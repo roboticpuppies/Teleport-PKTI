@@ -1,0 +1,76 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: docker
+platforms:
+  - name: debian10
+    image: geerlingguy/docker-debian10-ansible
+    command: /sbin/init
+    privileged: True
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    pre_build_image: true
+    groups:
+      - auth
+      - proxy
+  - name: debian9
+    image: geerlingguy/docker-debian9-ansible
+    command: /sbin/init
+    privileged: True
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    pre_build_image: true
+    groups:
+      - auth
+      - proxy
+  - name: ubuntu2004
+    image: geerlingguy/docker-ubuntu2004-ansible
+    command: /sbin/init
+    privileged: True
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    pre_build_image: true
+    groups:
+      - auth
+      - proxy
+  - name: ubuntu1804
+    image: geerlingguy/docker-ubuntu1804-ansible
+    command: /sbin/init
+    privileged: True
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    pre_build_image: true
+    groups:
+      - auth
+      - proxy
+provisioner:
+  name: ansible
+  inventory:
+    group_vars:
+      auth:
+        teleport_auth_servers:
+          - 127.0.0.1:3025
+        teleport_auth_tokens_node:
+          - xxx-changeme-xxx
+        teleport_auth_enabled: true
+        teleport_auth_cluster_name: "molecule"
+      proxy:
+        teleport_proxy_enabled: true
+      node:
+        teleport_auth_servers:
+          - "172.17.0.6:3025"
+verifier:
+  name: ansible

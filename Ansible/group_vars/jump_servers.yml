@@ -1,0 +1,6 @@
+---
+
+teleport_auth_token: "ooHohch6oo"
+teleport_auth_servers:
+  - ssh.qiscus.com:3025
+teleport_ca_pin: "sha256:0a75fad5ed46e2754dcd1745d2036b06bdb686b7439222f55be3985d0132ccd6"

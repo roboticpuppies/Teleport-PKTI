@@ -1,0 +1,22 @@
+version: '3'
+networks:
+  default:
+    external: true
+    name: personal_selfcheck_default-subnet
+services:
+  teleport:
+    image: quay.io/gravitational/teleport:8.0.7
+    container_name: teleport
+    ports:
+      - "3023:3023"
+      - "3025:3025"
+      - "3080:3080"
+    # restart: always
+    networks:
+      - default
+    volumes:
+      - ./config/teleport.yaml:/etc/teleport/teleport.yaml
+      - ./ssl-certificates:/etc/teleport/ssl-certificates
+      - teleport_data:/var/lib/teleport
+volumes: 
+  teleport_data:

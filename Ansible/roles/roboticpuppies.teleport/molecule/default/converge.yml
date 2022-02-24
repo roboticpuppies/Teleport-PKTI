@@ -1,0 +1,34 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: Get OS Family.
+      debug:
+        msg: "{{ ansible_os_family }}"
+
+    - name: Install required packages.
+      package:
+        name:
+          - openssl
+    
+    - name: Install required packages for Debian.
+      apt:
+        name:
+          # - software-properties-common
+          - apt-transport-https
+          - gpg-agent
+      when: ansible_facts['os_family'] == "Debian"
+    
+    - name: Update cache for Ubuntu.
+      apt: update_cache=yes
+      when: ansible_distribution == "Ubuntu"
+
+    - name: Install required packages for Ubuntu.
+      apt:
+        name:
+          - gpg-agent
+      when: ansible_distribution == "Ubuntu"
+
+    - name: "Include roboticpuppies.teleport"
+      include_role:
+        name: "ansible-role-teleport"

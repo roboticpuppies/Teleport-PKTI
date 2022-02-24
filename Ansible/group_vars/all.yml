@@ -1,0 +1,4 @@
+teleport_auth_token: "ooHohch6oo"
+teleport_auth_servers:
+  - ssh.myra.my.id:3025
+teleport_ca_pin: "sha256:1309e4ddcdd4cf0d847dc0a2b4d267c2e6d4312f34b19a03d30e93db2a9c5f2b"

@@ -1,0 +1,33 @@
+# teleport:
+#   auth_token: "ooHohch6oo"
+#   data_dir: /var/lib/teleport
+#   log:
+#     output: stderr
+#     severity: INFO
+#     format:
+#       output: text
+  # ca_pin: []
+  # diag_addr: ""
+  # auth_servers:
+  #   - 127.0.0.1:3025
+
+auth_service:
+  enabled: "yes"
+  listen_addr: 0.0.0.0:3025
+  authentication:
+    second_factor: off
+  message_of_the_day: "Welcome to the cluster. All activity will be recorded by Teleport."
+  tokens:
+    - "node:ooHohch6oo"
+
+ssh_service:
+  enabled: "yes"
+
+proxy_service:
+  enabled: "yes"
+  listen_addr: 0.0.0.0:3023
+  web_listen_addr: 0.0.0.0:443
+  public_addr: ssh.myra.my.id:443
+  https_keypairs:
+  - key_file: /etc/teleport/ssl-certificates/priv.key
+    cert_file: /etc/teleport/ssl-certificates/certificate.pem

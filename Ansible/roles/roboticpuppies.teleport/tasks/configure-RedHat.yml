@@ -1,0 +1,6 @@
+---
+- name: Configure Teleport.
+  template:
+    src: teleport.yaml.j2
+    dest: /etc/teleport.yaml
+  notify: restart teleport
